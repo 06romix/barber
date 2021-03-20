@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Barber shop</h1>
+<ul id="barbers">
+
+</ul>
+<script>
+    fetch('https://magento2.plumserver.com/dev6/barber/api.php?action=listOfBarbers')
+        .then((response) => {
+            return response.json();
+        })
+        .then((data) => {
+            let container = document.getElementById('barbers');
+            data.forEach(barber => {
+                let li = document.createElement('LI');
+                li.innerText = barber.name;
+                container.append(li);
+            });
+
+            console.log(data);
+        });
+</script>
+<h2>Register a new barber</h2>
+<form action="https://magento2.plumserver.com/dev6/barber/index.php?action=add" method="post">
+    <label>
+        Name:
+        <input type="text" name="name" required>
+    </label>
+    <label>
+        Phone Number:
+        <input type="tel" name="phone" required>
+    </label>
+    <input type="submit" value="Register">
+</form>
+
+</body>
+</html>
